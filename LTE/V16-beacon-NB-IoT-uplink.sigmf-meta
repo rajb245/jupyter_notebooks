@@ -1,0 +1,173 @@
+{
+    "global": {
+        "core:author": "Daniel Est\u00e9vez",
+        "core:datatype": "ci16_le",
+        "core:description": "V-19 beacon test uplink recording",
+        "core:num_channels": 1,
+        "core:recorder": "Maia SDR v0.6.1",
+        "core:sample_rate": 640000.0,
+        "core:sha512": "b993623fc6474c2ec3ffecdb36d993cbaaf71b058805cb12683f5bedbec67fe0bc3f92549be876ab9b1b0c017887774d5bb37cccd8bfc39414611dccecdb71ff",
+        "core:version": "1.2.5"
+    },
+    "captures": [
+        {
+            "core:datetime": "2025-11-15T17:34:32.232000000Z",
+            "core:frequency": 832344126.0,
+            "core:sample_start": 0
+        }
+    ],
+    "annotations": [
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832325846.5,
+            "core:freq_upper_edge": 832355846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 15360,
+            "core:sample_start": 107103
+        },
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832325846.5,
+            "core:freq_upper_edge": 832355846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 15360,
+            "core:sample_start": 122463
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 229981
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 231261
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 232541
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 233821
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 235101
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 236381
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 237661
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 238941
+        },
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832385846.5,
+            "core:freq_upper_edge": 832415846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 51200,
+            "core:sample_start": 251741
+        },
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832385846.5,
+            "core:freq_upper_edge": 832415846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 5120,
+            "core:sample_start": 313181
+        },
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832355846.5,
+            "core:freq_upper_edge": 832415846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 2560,
+            "core:sample_start": 329181
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 366301
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 367581
+        },
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832310846.5,
+            "core:freq_upper_edge": 832415846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 7680,
+            "core:sample_start": 387420
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 457180
+        },
+        {
+            "core:comment": "NPUSCH format 2\nPositive HARQ ACK = 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832250846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 1280,
+            "core:sample_start": 458460
+        },
+        {
+            "core:comment": "NPUSCH format 1",
+            "core:freq_lower_edge": 832220846.5,
+            "core:freq_upper_edge": 832415846.5,
+            "core:generator": "destevez Jupyter notebook",
+            "core:sample_count": 640,
+            "core:sample_start": 471259
+        }
+    ]
+}
