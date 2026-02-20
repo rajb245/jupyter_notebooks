@@ -30,7 +30,7 @@ Each directory typically contains one or more Jupyter notebooks plus associated 
 
 | Directory | Content |
 |-----------|---------|
-| `5G/` | 5G NR downlink decoding (PBCH, PDCCH, PDSCH) |
+| `5G/` | 5G NR downlink decoding (SS/PBCH, PDCCH, PDSCH, SIB1) — see blog post [1] |
 | `LTE/` | LTE downlink/uplink analysis; V16 beacon NB-IoT |
 | `CE5/` | Chang'e 5 lunar sample return mission telemetry |
 | `Tianwen/` | Tianwen-1 Mars mission telemetry analysis |
@@ -57,6 +57,8 @@ Each directory typically contains one or more Jupyter notebooks plus associated 
 | `Europa_Clipper/` | Europa Clipper frame decoding |
 | `CAMRAS-EVE/` | Earth-Venus-Earth radar experiment analysis |
 | `solar_orbiter/` | Solar Orbiter and BepiColombo frame decoding |
+
+**[1]** https://destevez.net/2023/08/demodulation-of-the-5g-nr-downlink/
 
 ### Root-level standalone notebooks
 
@@ -274,6 +276,37 @@ satellite = EarthSatellite(tle_line1, tle_line2, 'NAME', ts)
 t = ts.utc(2024, 1, 19, 12, 0, 0)
 geocentric = satellite.at(t)
 ```
+
+---
+
+## Notebook-Specific Notes
+
+### 5G NR downlink (`5G/5G NR downlink.ipynb`)
+
+The design decisions and signal processing chain are documented in detail in the blog post at
+https://destevez.net/2023/08/demodulation-of-the-5g-nr-downlink/
+
+**Input**: SigMF recording at 7.68 MSPS from an srsRAN 5 MHz gNB, stored under `5G/catkira/`.
+**Output**: Decoded MIB (via PBCH), DCI (via PDCCH), and SIB1 (via PDSCH), plus a Wireshark-compatible PCAP (`5G/nr-downlink.pcap`).
+**ASN.1 schema**: `5G/nr-rrc-17.3.0.asn1` for NR-RRC message decoding.
+
+**Key concepts and tricky areas:**
+
+- **Phase compensation** — 5G NR introduces a per-symbol phase correction that does not exist in LTE or other OFDM waveforms. The 3GPP upconversion formula includes an extra term `e^{-2πi·f0·(t_start,l + T_CP,l)}` for each symbol `l`. This allows a receiver to work with any contiguous subset of subcarriers (not necessarily centred on the transmitter's DC subcarrier) without knowing the transmitter's DC subcarrier index — only the nominal RF frequency of the subcarrier it wants to use as DC is needed. In practice this is implemented as a lookup table of 7 phase corrections (one per symbol in a half-subframe) applied after OFDM demodulation. Forgetting this step produces apparent frequency jumps between consecutive symbols.
+
+- **"Poor man's Schmidl & Cox"** — correlates the cyclic prefix copy at the start of a symbol with the matching waveform at the end of the same symbol to estimate symbol timing and a coarse carrier frequency offset. Unlike the true Schmidl & Cox it works on any OFDM signal, but it is insensitive to inter-symbol phase rotations (including from the 5G phase compensation above), making it a useful sanity check independent of those corrections.
+
+- **SS/PBCH block structure** — four consecutive OFDM symbols; symbol 0 contains the PSS, symbol 2 contains the SSS (shared with PBCH), and symbols 1, 2, 3 carry the PBCH. The block can appear anywhere in the cell frequency grid (not centred on DC as in LTE). 5G cell ID is `NcellID = 3·NID1 + NID2` where `NID2 ∈ {0,1,2}` (from PSS) and `NID1 ∈ {0,…,335}` (from SSS).
+
+- **PSS/SSS sequences** — both are BPSK-modulated 127-subcarrier m-sequence-derived signals (unlike LTE's Zadoff-Chu PSS). The SSS is a Gold code; its two m-sequence shifts encode `NID1` and `NID2` in a way that allows efficient detection with a small number of FFT-based correlations.
+
+- **PBCH DM-RS** — subcarrier index ≡ `NcellID mod 4` carries the PBCH demodulation reference signal (QPSK). Initial value for the Gold-code DM-RS generator encodes the SS/PBCH block index (`i_SSB`), enabling blind detection of which repetition within a radio frame is being processed.
+
+- **Error correction layers** — PBCH and PDCCH use Polar codes (Successive Cancellation LLR decoding); PDSCH uses LDPC codes (belief propagation, base graph 2). All three have associated CRC checks (CRC-24C for PBCH; masked CRC-24C for DCI; CRC-16 for transport block).
+
+- **Symbol timing inside demodulation** — the notebook starts OFDM demodulation at the middle of each cyclic prefix (not the start of the useful symbol) for robustness to timing offset errors; the resulting phase-vs-frequency slope is corrected in the frequency domain after FFT.
+
+- **Sampling frequency offset (SFO)** — estimated by fitting a line to the per-symbol-timing-offset measurements across all SS/PBCH blocks. The recording has SFO ≈ −3.2 ppm.
 
 ---
 
